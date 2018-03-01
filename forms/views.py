@@ -6,7 +6,7 @@ from .models import Questionnaire, Question, FilledForm
 from .forms import BuildForm, BuildQuestion,DesForm,QuesForm
 from django.views.generic.edit import UpdateView
 import json
-from nomi.models import Nomination
+from core.models import Nomination
 
 
 def get_access_and_post(request,nomi_pk):
@@ -106,7 +106,3 @@ def replicate(pk):
                                 question_choices=question.question_choices)
 
     return new_questionnaire
-
-
-
-

@@ -1,5 +1,5 @@
 from django import forms
-from nomi.models import Club,Post,Session
+from core.models import Club,Post,Session
 from datetime import date
 
 def give_session(st_year):
@@ -63,7 +63,9 @@ class PostForm(forms.Form):
 
 
 class SessionForm(forms.Form):
-    CH = [(session.id, give_session(session.start_year)) for session in Session.objects.all()]
-    CH = sorted(CH, key=lambda x: x[1])
-    CH = CH[::-1]
-    year = forms.ChoiceField( choices= CH,  widget=forms.Select , initial=current_session())
+    def __init__(self, *args, **kwargs):
+        super(SessionForm, self).__init__(*args, **kwargs)
+        CH = [(session.id, give_session(session.start_year)) for session in Session.objects.all()]
+        CH = sorted(CH, key=lambda x: x[1])
+        CH = CH[::-1]
+        self.fields['year'] = forms.ChoiceField( choices= CH,  widget=forms.Select , initial=current_session())

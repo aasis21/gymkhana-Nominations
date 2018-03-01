@@ -1,6 +1,6 @@
 from django import forms
 from .models import QUES_TYPES,Question
-from nomi.models import Nomination
+from core.models import Nomination
 
 
 # in use
