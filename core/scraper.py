@@ -4,77 +4,34 @@ from bs4 import BeautifulSoup, Comment
 import re
 
 
-def getRecord(rollNo):
-    roll = str(rollNo)
+def getRecord(username):
+    roll = str(username)
 
-    req = requests.post("https://oa.cc.iitk.ac.in/Oa/Jsp/OAServices/IITk_SrchRes_new.jsp?sbm=Y", data={'typ':'stud','numtxt': roll,'bk':"",'k1':"#ADELukNhHiN=H!_@/JyAGZyZaIWB$juKblR&amp;KFEtBFWNSo%p-#OTCX",'k2':"gnYJd#NsOd-WphfNDrZ_FVDEAFGew!nRBih$@WDLSEhTXVJeHjLBSuI",'k3':"Jp=IE&amp;CFHUp_UOIXYaPQhmTCH_U/xz&amp;u@fZoiPraG-YuUEsoEBGVr$S"})
+    req = requests.get("https://search.pclub.in/api/student", params={'username':roll})
     soup = BeautifulSoup(req.text,"lxml")
     record = {}
 
-    record['roll'] = roll
-
-    image = 'http://oa.cc.iitk.ac.in/Oa/Jsp/Photo/' + roll + '_0.jpg'
+    data = soup.findChildren('p')
+    datalist = data[0].text.split('","')
+    datalist = [ word.split(':"')[1] for word in datalist ]
+    record['email'] = roll+"@iitk.ac.in"
+    
+    record['roll']= datalist[5]
+    image = 'http://oa.cc.iitk.ac.in/Oa/Jsp/Photo/' + datalist[5] + '_0.jpg'
     record['image'] = image
 
-    data = soup.findChildren('p')
-    name = data[0].text.split(':')[1]
-    name = re.sub('\s+', ' ', name)
-    record['name'] = name
-
-    if not name:
+    if not record['roll']:
         return None
 
-    program = data[1].text.split(':')[1]
-    program = re.sub('\s+', ' ', program)
-    record['program'] = program
+    record['program'] = datalist[7]
 
-    dept = data[2].text.split(':')[1]
-    dept = re.sub('\s+', ' ', dept)
-    record['department'] = dept
+    record['department'] = datalist[2]
 
-    room = data[3].text.split(':')[1]
-    room = re.sub('\s+', ' ', room)
-    hall = room.split(',')[0]
-    record['hall'] = hall
-    room = room.split(',')[1]
-    record['room'] = room
-
-    email = data[4].text.split(':')[1]
-    email = re.sub('\s+', '', email)
-    record['email'] = email
-
-    bloodData = data[5].text.split('<b>')[0]
-    blood = bloodData.split(':')[1]
-    blood = re.sub('\s+', '', blood)
-    record['blood'] = blood
-
-
-
-    genderData = data[6].text.split(':')
-    gender = genderData[1][0]
-    gender = re.sub('\s+', ' ', gender)
-    record['gender'] = gender
-
-    country = genderData[2]
-    country = re.sub('\s+', ' ', country)
-    record['country'] = country
-
-    comments = soup.findAll(text=lambda text:isinstance(text, Comment))
-    addressSoup = BeautifulSoup(comments[1])
-    permanentAddressData = addressSoup.findAll('p')[1].text
-    phonePos = permanentAddressData.index('Phone no:')
-    mobilePos = permanentAddressData.index('Mobile no:')
-
-    address  = permanentAddressData[19:phonePos]
-    address = re.sub('\s+', ' ', address)
-    record['address'] = address
-
-    phone = permanentAddressData[(phonePos + 9):mobilePos]
-    phone = re.sub('\s+', ' ', phone)
-    record['phone'] = phone
-
-    mobile = permanentAddressData[(mobilePos + 10):]
-    mobile = re.sub('\s+', ' ', mobile)
-    record['mobile'] = mobile
-
+    record['hall'] = datalist[4]
+    record['room'] = datalist[8]
+    record['name'] = datalist[6]
+    record['blood'] = datalist[1]
+    record['gender'] = datalist[3]
+    record['mobile'] = "0000000000"
+    print(record)
     return record
