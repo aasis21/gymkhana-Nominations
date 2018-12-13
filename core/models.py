@@ -218,8 +218,8 @@ class UserProfile(models.Model):
         return str(self.name)
 
     def image_url(self):
-        if self.user_img and hasattr(self.user_img, 'url'):
-            return self.user_img.url
+        if self.roll_no:
+            return 'http://oa.cc.iitk.ac.in/Oa/Jsp/Photo/' + str(self.roll_no) + '_0.jpg'
         else:
             return '/static/nomi/img/banner.png'
 

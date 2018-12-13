@@ -111,7 +111,7 @@ class CommentForm(forms.Form):
 
 
 class UserId(forms.Form):
-    user_roll = forms.IntegerField(label="Roll NO.")
+    user_roll = forms.CharField(label="IITK Username")
 
 
 class SelectNomiForm(forms.Form):
