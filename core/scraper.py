@@ -8,11 +8,10 @@ def getRecord(username):
     roll = str(username)
 
     req = requests.get("https://search.pclub.in/api/student", params={'username':roll})
-    soup = BeautifulSoup(req.text,"lxml")
     record = {}
 
-    data = soup.findChildren('p')
-    datalist = data[0].text.split('","')
+    data = req.text
+    datalist = data.split('","')
     datalist = [ word.split(':"')[1] for word in datalist ]
     record['email'] = roll+"@iitk.ac.in"
     
@@ -33,5 +32,4 @@ def getRecord(username):
     record['blood'] = datalist[1]
     record['gender'] = datalist[3]
     record['mobile'] = "0000000000"
-    print(record)
     return record
