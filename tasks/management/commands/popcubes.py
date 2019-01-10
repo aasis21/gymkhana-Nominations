@@ -5,66 +5,20 @@ from core.models import *
 from core.forms import *
 
 users = {
-    'sparrow': {
-        'username': 'sparrow', 'email' : 'sparrow@iitk.ac.in', 'password' :'pass1234',
-        'name': 'Jack Sparrow', 'roll' : 190123, 'program' : 'BT' , 'department' : 'CSE' ,
-        'mobile' : 7318099999, 'hall' : '15', 'room' : 'B967'
-        },
-    'groot': {
-        'username': 'groot', 'email' : 'groot@iitk.ac.in', 'password' :'pass1234',
-        'name': 'Groot Tonga', 'roll' : 190167, 'program' : 'BT' , 'department' : 'CSE' ,
-        'mobile' : 7318099999, 'hall' : '15', 'room' : 'B967'
-        },
-    'boyd': {
-        'username': 'boyd', 'email' : 'boyd@iitk.ac.in', 'password' :'pass1234',
-        'name': ' Ellis Boyd', 'roll' : 190110, 'program' : 'BT' , 'department' : 'CSE' ,
-        'mobile' : 7318099999, 'hall' : '15', 'room' : 'B967'
-        },
-    'faizal': {
-        'username': 'faizal', 'email' : 'faizal@iitk.ac.in', 'password' :'pass1234',
-        'name': 'Faizal Khan', 'roll' : 190169, 'program' : 'BT' , 'department' : 'CE' ,
-        'mobile' : 7318099999, 'hall' : '15', 'room' : 'B969'
-        },
-    'legolas': {
-        'username': 'legolas', 'email' : 'legolas@iitk.ac.in', 'password' :'pass1234',
-        'name': 'Legolas Kondrial', 'roll' : 190129, 'program' : 'BT' , 'department' : 'BSBE' ,
-        'mobile' : 7318099999, 'hall' : '15', 'room' : 'B967'
-        },
-    'amy': {
-        'username': 'amy', 'email' : 'amy@iitk.ac.in', 'password' :'pass1234',
-        'name': 'Amy Dunne', 'roll' : 190160, 'program' : 'BT' , 'department' : 'CSE' ,
-        'mobile' : 7318099998, 'hall' : '6', 'room' : 'B935'
+    'supervoter': {
+        'username': 'supervoter', 'email' : 'ec_sg@iitk.ac.in', 'password' :'supervoter',
+        'name': 'Mayank Chauhan', 'roll' : 111111, 'program' : 'BT' , 'department' : 'aaa' ,
+        'mobile' : 8085822338, 'hall' : '1', 'room' : 'E316'
         },
     }
 
 clubs = [
-    {'name': 'Student\'Senate' , 'parent': None },
-    {'name': 'Presidential Council' , 'parent': 'Student\'Senate' },
-    {'name': 'Cultural Council' , 'parent': 'Student\'Senate' },
-    {'name': 'Games and sports Council' , 'parent': 'Student\'Senate' },
-    {'name': 'Science and Technology Council' , 'parent': 'Student\'Senate' },
-    {'name': 'Dance Club', 'parent' : 'Cultural Council'},
-    {'name': 'Dramatics Club', 'parent' : 'Cultural Council'},
-    {'name': 'ELS', 'parent' : 'Cultural Council'},
-    {'name': 'HSS', 'parent' : 'Cultural Council'},
-    {'name': 'Aeromodelling Club', 'parent' : 'Science and Technology Council' },
-    {'name': 'Astronomy Club', 'parent' : 'Science and Technology Council' },
-    {'name': 'Electronics Club', 'parent' : 'Science and Technology Council' },
-    {'name': 'Programming Club', 'parent' : 'Science and Technology Council' },
-    {'name': 'Robotics Club', 'parent' : 'Science and Technology Council' },
+    {'name': 'Election Commission' , 'parent': None },
 ]
 
 posts = [
-    {'name' : 'ChairPerson, Student Gymkhana', 'club' : 'Student\'Senate', 'parent' : None,
-        'tags' : ['Student\'Senate'], 'post_holders' : ['legolas'], 'perms' : 'can ratify the post'},
-    {'name' : 'President', 'club' : 'Presidential Council', 'parent' : 'ChairPerson, Student Gymkhana',
-        'tags' : ['Student\'Senate','Presidential Council'], 'post_holders' : ['amy'], 'perms' : 'can approve post and send nominations to users'},
-    {'name' : 'Gen Sec, SNT', 'club' : 'Science and Technology Council', 'parent' : 'ChairPerson, Student Gymkhana',
-        'tags' : ['Student\'Senate','Science and Technology Council'], 'post_holders' : ['boyd'], 'perms' : 'can approve post and send nominations to users'},
-    {'name' : 'Cordinator, Pclub', 'club' : 'Programming Club', 'parent' : 'Gen Sec, SNT',
-        'tags' : ['Student\'Senate','Science and Technology Council','Programming Club'], 'post_holders' : ['groot'], 'perms' : 'normal'},
-    {'name' : 'Cordinator, Eclub', 'club' : 'Electronics Club', 'parent' : 'Gen Sec, SNT',
-        'tags' : ['Student\'Senate','Science and Technology Council','Programming Club'], 'post_holders' : [], 'perms' : 'normal'},
+    {'name' : 'Chief Election Officer', 'club' : 'Election Commission', 'parent' : None,
+        'tags' : ['Election Commission'], 'post_holders' : ['supervoter'], 'perms' : 'can ratify the post'},
 ]
 
 class Command(BaseCommand):
