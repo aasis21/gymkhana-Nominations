@@ -3,7 +3,7 @@ chardet==3.0.4
 Django==1.11
 django-bootstrap-form==3.4
 idna==2.7
-Pillow==5.2.0
+Pillow==6.2.0
 pyperclip==1.6.4
 pytz==2018.5
 requests==2.19.1
